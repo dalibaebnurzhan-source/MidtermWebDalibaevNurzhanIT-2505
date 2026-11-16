@@ -7,7 +7,9 @@
   <title>Schedule &amp; Facilities | NURFIGHT CLUB</title>
   <meta name="description" content="See the NURFIGHT CLUB weekly boxing, MMA and CrossFit timetable and explore our gym facilities.">
   <script>
-  
+    if (localStorage.getItem('nurfight-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   </script>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
