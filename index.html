@@ -1,251 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NURFIGHT CLUB | Schedule & Coaches</title>
-
-   
-      
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#0e0e11" id="theme-color-meta">
+  <title>Schedule &amp; Facilities | NURFIGHT CLUB</title>
+  <meta name="description" content="See the NURFIGHT CLUB weekly boxing, MMA and CrossFit timetable and explore our gym facilities.">
+  <script>
+    if (localStorage.getItem('nurfight-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-    <div class="container nav-container">
-      <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="NURFIGHT CLUB Logo" style="height: 60px; width: 65px; border-radius: 50%;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-menu ms-auto">
-          <li><a href="#schedule" class="nav-link-custom active">Schedule</a></li>
-          <li><a href="#facilities" class="nav-link-custom">Facilities</a></li>
-          <li><a href="#trainers" class="nav-link-custom">Trainers</a></li>
-          <li><a href="#join" class="nav-link-custom">Join Club</a></li>
-        </ul>
+<body data-page="schedule">
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Логотип пен Батырма қатар тұру үшін бір блокқа немесе жақын орналастырылады -->
+      <div class="logo-with-theme" style="display: flex; align-items: center; gap: 12px;">
+        <a class="logo-link" href="index.html" aria-label="NURFIGHT CLUB home">
+          <img class="logo" src="images/logo.png.png" alt="NURFIGHT CLUB logo">
+        </a>
+        <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Switch mode">☀️ Light</button>
       </div>
-    </div>
-  </nav>
 
-  <!-- Page Header Banner -->
-  <header class="page-header mt-5">
-    <div class="container">
-      <h1>SCHEDULE & <span>COACHES</span></h1>
-      <p>Check our weekly timetable and meet our team of championship trainers</p>
+      <button class="mobile-menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="index.html#schedule" data-nav="schedule">Schedule</a>
+        <a href="index.html#facilities" data-nav="facilities">Facilities</a>
+        <a href="trainers.html#trainers" data-nav="trainers">Trainers</a>
+        <a href="trainers.html#join" data-nav="join">Join Club</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Schedule Table Section -->
-  <section id="schedule" class="section schedule-section">
-    <div class="container">
-      <div class="section-header center">
-        <h2 class="section-title">WEEKLY <span>TIMETABLE</span></h2>
+  <main>
+    <section class="hero" id="schedule" aria-labelledby="hero-heading">
+      <div class="container hero-inner">
+        <h1 id="hero-heading">SCHEDULE &amp; <span>COACHES</span></h1>
+        <p>Check our weekly timetable and meet our team of championship trainers</p>
       </div>
+    </section>
 
-      <div class="table-responsive">
-        <table class="schedule-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Mon - Wed - Fri</th>
-              <th>Tue - Thu - Sat</th>
-              <th>Sunday</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>09:00 - 10:30</td>
-              <td><span class="tag tag-box">Boxing (Adults)</span></td>
-              <td><span class="tag tag-fit">CrossFit Morning</span></td>
-              <td><span class="tag tag-free">Day Off</span></td>
-            </tr>
-            <tr>
-              <td>16:00 - 17:30</td>
-              <td><span class="tag tag-mma">MMA (Kids)</span></td>
-              <td><span class="tag tag-box">Boxing (Teens)</span></td>
-              <td><span class="tag tag-free">Day Off</span></td>
-            </tr>
-            <tr>
-              <td>19:00 - 20:30</td>
-              <td><span class="tag tag-mma">MMA Pro</span></td>
-              <td><span class="tag tag-fit">CrossFit Night</span></td>
-              <td><span class="tag tag-off">Day Off</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gym Facilities Accordion (jQuery Feature 1) -->
-  <section id="facilities" class="section facilities-section">
-    <div class="container">
-      <div class="section-header center">
-        <h2 class="section-title">OUR <span>GYM FACILITIES</span></h2>
-      </div>
-
-      <div class="facilities-accordion">
-        
-        <!-- 1-ші пункт -->
-        <div class="accordion-item-custom">
-          <div class="accordion-header-custom">
-            <span>Professional Ring & Octagon</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="accordion-content-custom">
-            <!-- Осы жерге сурет қосылды -->
-            <img src="photot.png3.jpeg" alt="Octagon" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-            <p>Octagon for professional fighters with full prep zone and equipment.</p>
-          </div>
-        </div>
-
-        <!-- 2-ші пункт -->
-        <div class="accordion-item-custom">
-          <div class="accordion-header-custom">
-            <span>Modern Strength & Cardio Area</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="accordion-content-custom">
-            <!-- Осы жерге сурет қосылды -->
-            <img src="photo.png4.jpeg" alt="Gym Equipment" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-            <p>Heavy weight equipment, treadmills, assault bikes, and rowing machines.</p>
-          </div>
-        </div>
-
-        <!-- 3-ші пункт -->
-        <div class="accordion-item-custom">
-          <div class="accordion-header-custom">
-            <span>Recovery & Finnish Sauna</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="accordion-content-custom">
-            <!-- Осы жерге сурет қосылды -->
-            <img src="photo.png2.jpeg" alt="Sauna" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-            <p>Finnish sauna, ice baths, locker rooms, and private showers for fast recovery.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- JS Functionality: Trainers Search & Filter (Criterion 3) -->
-  <section id="trainers" class="section trainers-section">
-    <div class="container">
-      <div class="section-header center">
-        <h2 class="section-title">OUR <span>TRAINERS</span></h2>
-        <p>Search and filter our elite certified coaches</p>
-      </div>
-
-      <!-- Controls -->
-      <div class="row g-3 mb-4">
-        <div class="col-md-8">
-          <input type="text" id="searchInput" class="form-control bg-dark text-white border-secondary" placeholder="Search coach by name or sport...">
-        </div>
-        <div class="col-md-4">
-          <select id="categoryFilter" class="form-select bg-dark text-white border-secondary">
-            <option value="All">All Categories</option>
-            <option value="Boxing">Boxing</option>
-            <option value="MMA">MMA</option>
-            <option value="CrossFit">CrossFit</option>
-            <option value="BJJ">BJJ</option>
-          </select>
+    <section class="section schedule-section" aria-labelledby="timetable-heading">
+      <div class="container">
+        <h2 id="timetable-heading">WEEKLY <span>TIMETABLE</span></h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Weekly timetable; scroll horizontally on small screens">
+          <table class="timetable">
+            <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Mon - Wed - Fri</th>
+                <th scope="col">Tue - Thu - Sat</th>
+                <th scope="col">Sunday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">09:00 - 10:30</th>
+                <td><span class="schedule-pill boxing">Boxing (Adults)</span></td>
+                <td><span class="schedule-pill crossfit">CrossFit Morning</span></td>
+                <td><span class="schedule-pill dayoff">Day Off</span></td>
+              </tr>
+              <tr>
+                <th scope="row">16:00 - 17:30</th>
+                <td><span class="schedule-pill mma">MMA (Kids)</span></td>
+                <td><span class="schedule-pill boxing">Boxing (Teens)</span></td>
+                <td><span class="schedule-pill dayoff">Day Off</span></td>
+              </tr>
+              <tr>
+                <th scope="row">19:00 - 20:30</th>
+                <td><span class="schedule-pill mma">MMA Pro</span></td>
+                <td><span class="schedule-pill crossfit">CrossFit Night</span></td>
+                <td><span class="schedule-pill dayoff muted">Day Off</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </section>
 
-      <!-- Container where JS renders 8 trainer objects dynamically -->
-      <div id="trainersGrid" class="row g-4"></div>
-      <div id="noResults" class="text-center text-muted my-4 style-none" style="display: none;">
-        <h4>No trainers found matching your criteria</h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bootstrap Form with JS Validation (Criterion 2 & 5) -->
-  <section id="join" class="section join-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="contact-form-box">
-            <h2 class="section-title text-center mb-4">JOIN <span>NURFIGHT CLUB</span></h2>
-            
-            <div id="formSuccessAlert" class="alert alert-success d-none" role="alert">
-              <i class="fas fa-check-circle me-2"></i> Registration successful! Our manager will contact you soon.
+    <section class="section facilities-section" id="facilities" aria-labelledby="facilities-heading">
+      <div class="container">
+        <h2 id="facilities-heading">OUR <span>GYM FACILITIES</span></h2>
+        <div class="accordion" aria-label="Facilities information">
+          <div class="accordion-item">
+            <h3><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-ring" id="trigger-ring">Professional Ring &amp; Octagon <span class="chevron" aria-hidden="true"></span></button></h3>
+            <div class="accordion-panel" id="panel-ring" role="region" aria-labelledby="trigger-ring" hidden>
+              <p>Train your boxing, MMA and BJJ skills in a dedicated combat-sports environment, with practice spaces for technique, sparring and conditioning.</p>
+              <img src="images/photot.png3.jpeg" alt="Professional Ring & Octagon" class="facility-img">
             </div>
+          </div>
 
-            <form id="membershipForm" novalidate>
-              <!-- Field 1: Full Name -->
-              <div class="form-group mb-3">
-                <label for="fullName" class="form-label">Full Name *</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Enter your name">
-                <div class="invalid-feedback" id="fullNameError">Please enter at least 3 characters.</div>
-              </div>
+          <div class="accordion-item">
+            <h3><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-strength" id="trigger-strength">Modern Strength &amp; Cardio Area <span class="chevron" aria-hidden="true"></span></button></h3>
+            <div class="accordion-panel" id="panel-strength" role="region" aria-labelledby="trigger-strength" hidden>
+              <p>Build your endurance and strength in a training area designed for conditioning, functional workouts and fitness preparation.</p>
+              <img src="images/photo.png4.jpeg" alt="Modern Strength & Cardio Area" class="facility-img">
+            </div>
+          </div>
 
-              <!-- Field 2: Email -->
-              <div class="form-group mb-3">
-                <label for="email" class="form-label">Email Address *</label>
-                <input type="email" class="form-control" id="email" placeholder="example@mail.com">
-                <div class="invalid-feedback" id="emailError">Please enter a valid email address.</div>
-              </div>
-
-              <!-- Field 3: Phone -->
-              <div class="form-group mb-3">
-                <label for="phone" class="form-label">Phone Number *</label>
-                <input type="tel" class="form-control" id="phone" placeholder="+77071234567">
-                <div class="invalid-feedback" id="phoneError">Phone number must be at least 10 digits.</div>
-              </div>
-
-              <!-- Field 4: Program Selection -->
-              <div class="form-group mb-3">
-                <label for="program" class="form-label">Select Program *</label>
-                <select class="form-select bg-dark text-white border-secondary" id="program">
-                  <option value="">-- Choose Option --</option>
-                  <option value="boxing">Boxing (Adults / Teens)</option>
-                  <option value="mma">MMA (Pro / Kids)</option>
-                  <option value="crossfit">CrossFit</option>
-                  <option value="vip">Personal Training (VIP)</option>
-                </select>
-                <div class="invalid-feedback" id="programError">Please select a program.</div>
-              </div>
-
-              <!-- Field 5: Preferred Start Date -->
-              <div class="form-group mb-4">
-                <label for="startDate" class="form-label">Preferred Start Date *</label>
-                <input type="date" class="form-control" id="startDate">
-                <div class="invalid-feedback" id="startDateError">Please choose a valid date.</div>
-              </div>
-
-              <button type="submit" class="btn btn-primary full-width py-2">Submit Application</button>
-            </form>
+          <div class="accordion-item">
+            <h3><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-recovery" id="trigger-recovery">Recovery &amp; Finnish Sauna <span class="chevron" aria-hidden="true"></span></button></h3>
+            <div class="accordion-panel" id="panel-recovery" role="region" aria-labelledby="trigger-recovery" hidden>
+              <p>Make recovery part of your routine. Relax after demanding sessions in the club's dedicated recovery and Finnish sauna area.</p>
+              <img src="images/photo.png2.jpeg" alt="Recovery & Finnish Sauna" class="facility-img">
+            </div>
           </div>
         </div>
+        <div class="section-cta"><p>Ready to start training with us?</p><a class="primary-button" href="trainers.html#join">JOIN NURFIGHT CLUB</a></div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <a href="index.html" class="logo">
-        <img src="logo.png.png" alt="NURFIGHT CLUB Logo" style="height: 40px;">
-      </a>
-      <p class="mt-2">&copy; 2026 NURFIGHT CLUB. All rights reserved.</p>
-    </div>
+  <footer class="site-footer">
+    <a href="index.html" aria-label="Back to NURFIGHT CLUB home"><img src="images/logo.png.png" alt=""></a>
+    <p>© 2026 NURFIGHT CLUB. All rights reserved.</p>
   </footer>
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

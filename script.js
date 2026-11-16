@@ -1,196 +1,116 @@
-$(document.getElementById('membershipForm') ? document : window).ready(function () {
+"use strict";
 
-  // ==========================================
-  // 1. JAVASCRIPT FUNCTIONALITY (Criterion 3)
-  // 8 Object Array + DOM Manipulation + Filter/Search
-  // ==========================================
-
-  const trainers = [
-  { id: 1, name: "Viktor Tsoy", category: "BJJ", exp: "3 Years Exp", desc: "Grappling & Submissions Specialist.", img: "coach1..jpg" },
-  { id: 2, name: "Sergey Morozov", category: "Boxing", exp: "8 Years Exp", desc: "Head Boxing Coach & National Champion.", img: "coach2.jpeg" },
-  { id: 3, name: "Nurasyl Kassymov", category: "MMA", exp: "6 Years Exp", desc: "Pro Fighter with 10-2 Record.", img: "coach3.jpeg" },
-  { id: 4, name: "Alexey Smirnov", category: "CrossFit", exp: "5 Years Exp", desc: "Certified CrossFit Level 3 Trainer.", img: "coach4.jpeg" },
-  { id: 5, name: "Dmitry Volkov", category: "Boxing", exp: "7 Years Exp", desc: "Specializes in Teens & Beginners.", img: "coach5.jpg" },
-  { id: 6, name: "Arman Akhmetov", category: "MMA", exp: "4 Years Exp", desc: "Kids MMA & Striking Coach.", img: "coach6.jpeg" },
-  { id: 7, name: "Mikhail Sokolov", category: "CrossFit", exp: "6 Years Exp", desc: "Endurance & Conditioning Expert.", img: "coach7.jpg" },
-  { id: 8, name: "Sultan Bekov", category: "BJJ", exp: "9 Years Exp", desc: "Black Belt BJJ Head Instructor.", img: "coach8.jpg" },
-];
-
-  // Function to render trainers into DOM
-  function renderTrainers(items) {
-    const grid = $('#trainersGrid');
-    grid.empty();
-
-    if (items.length === 0) {
-      $('#noResults').show();
-      return;
-    } else {
-      $('#noResults').hide();
-    }
-
-    items.forEach(trainer => {
-      const cardHTML = `
-        <div class="col-md-6 col-lg-3">
-          <div class="trainer-card">
-            <img src="${trainer.img}" alt="${trainer.name}">
-            <div class="trainer-info">
-              <span class="category">${trainer.category}</span>
-              <h4>${trainer.name}</h4>
-              <span class="exp">${trainer.exp}</span>
-              <p class="text-muted small mb-0">${trainer.desc}</p>
-            </div>
-          </div>
-        </div>
-      `;
-      grid.append(cardHTML);
-    });
-  }
-
-  // Initial Render
-  renderTrainers(trainers);
-
-  // Search & Filter Logic
-  function filterTrainers() {
-    const searchText = $('#searchInput').val().toLowerCase().trim();
-    const selectedCategory = $('#categoryFilter').val();
-
-    const filtered = trainers.filter(t => {
-      const matchesSearch = t.name.toLowerCase().includes(searchText) || t.category.toLowerCase().includes(searchText);
-      const matchesCategory = (selectedCategory === "All") || (t.category === selectedCategory);
-      return matchesSearch && matchesCategory;
-    });
-
-    renderTrainers(filtered);
-  }
-
-  $('#searchInput').on('keyup input', filterTrainers);
-  $('#categoryFilter').on('change', filterTrainers);
-
-  // ==========================================
-  // 2. FORMS & VALIDATION (Criterion 2)
-  // Bootstrap Form + JS Real-time Validation
-  // ==========================================
-
-  const $form = $('#membershipForm');
-  const $successAlert = $('#formSuccessAlert');
-
-  // Input elements
-  const $fullName = $('#fullName');
-  const $email = $('#email');
-  const $phone = $('#phone');
-  const $program = $('#program');
-  const $startDate = $('#startDate');
-
-  // Regex patterns
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[+]?[0-9]{10,14}$/;
-
-  function validateField(input, isConditionMet) {
-    if (isConditionMet) {
-      input.removeClass('is-invalid').addClass('is-valid');
-      return true;
-    } else {
-      input.removeClass('is-valid').addClass('is-invalid');
-      return false;
-    }
-  }
-
-  // Real-time Validation Events
-  $fullName.on('input', function () {
-    validateField($(this), $(this).val().trim().length >= 3);
-  });
-
-  $email.on('input', function () {
-    validateField($(this), emailRegex.test($(this).val().trim()));
-  });
-
-  $phone.on('input', function () {
-    validateField($(this), phoneRegex.test($(this).val().trim()));
-  });
-
-  $program.on('change', function () {
-    validateField($(this), $(this).val() !== "");
-  });
-
-  $startDate.on('change', function () {
-    validateField($(this), $(this).val() !== "");
-  });
-
-  // Form Submit Handler
-  $form.on('submit', function (e) {
-    e.preventDefault();
-
-    const isNameValid = validateField($fullName, $fullName.val().trim().length >= 3);
-    const isEmailValid = validateField($email, emailRegex.test($email.val().trim()));
-    const isPhoneValid = validateField($phone, phoneRegex.test($phone.val().trim()));
-    const isProgramValid = validateField($program, $program.val() !== "");
-    const isDateValid = validateField($startDate, $startDate.val() !== "");
-
-    if (isNameValid && isEmailValid && isPhoneValid && isProgramValid && isDateValid) {
-      $successAlert.removeClass('d-none');
-      $form[0].reset();
-      $('.form-control, .form-select').removeClass('is-valid is-invalid');
-      
-      // Auto-hide alert after 5 seconds
-      setTimeout(() => {
-        $successAlert.addClass('d-none');
-      }, 5000);
-    }
-  });
-
-  // ==========================================
-  // 3. JQUERY EFFECTS & ANIMATIONS (Criterion 4)
-  // ==========================================
-
-  // Effect 1: Custom Accordion Toggle with jQuery
-  $('.accordion-header-custom').on('click', function () {
-    const content = $(this).next('.accordion-content-custom');
-    const icon = $(this).find('i');
-
-    $('.accordion-content-custom').not(content).slideUp(300);
-    $('.accordion-header-custom i').not(icon).removeClass('fa-chevron-up').addClass('fa-chevron-down');
-
-    content.slideToggle(300);
-    icon.toggleClass('fa-chevron-down fa-chevron-up');
-  });
-
-  // Effect 2: Smooth Scrolling for Navigation Links
-  $('.nav-link-custom').on('click', function (e) {
-    if (this.hash !== "") {
-      e.preventDefault();
-      const hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top - 80
-      }, 1);
-    }
-  });
-
-  // Effect 3: Button Hover Pulse/Scale Effect using jQuery
-  $('.btn-primary').hover(
-    function () { $(this).stop().animate({ opacity: 0.9 }, 150); },
-    function () { $(this).stop().animate({ opacity: 1.0 }, 150); }
-  );
-
+const nav = document.querySelector("#main-nav");
+const menuButton = document.querySelector(".mobile-menu-toggle");
+menuButton?.addEventListener("click", () => {
+  const isOpen = nav.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
 });
-// Меню батырмаларына басқан кезде қызыл түсті ауыстыру
-$('.nav-link-custom').on('click', function() {
-  $('.nav-link-custom').removeClass('active');
-  $(this).addClass('active');
+nav?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+  nav.classList.remove("open");
+  menuButton?.setAttribute("aria-expanded", "false");
+}));
+
+function updateActiveNav() {
+  const isTrainersPage = document.body.dataset.page === "trainers";
+  const hash = window.location.hash.slice(1);
+  const activeKey = hash || (isTrainersPage ? "trainers" : "schedule");
+  document.querySelectorAll("[data-nav]").forEach(link => {
+    const active = link.dataset.nav === activeKey;
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+window.addEventListener("hashchange", updateActiveNav);
+updateActiveNav();
+
+document.querySelectorAll(".accordion-trigger").forEach(button => {
+  button.addEventListener("click", () => {
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    const shouldOpen = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(shouldOpen));
+    panel.hidden = !shouldOpen;
+  });
 });
 
-$(window).on('scroll', function() {
-  let scrollPos = $(window).scrollTop() + 150;
-  
-  $('.section, header.page-header').each(function() {
-    let top = $(this).offset().top;
-    let bottom = top + $(this).outerHeight();
-    let id = $(this).attr('id');
-
-    if (scrollPos >= top && scrollPos <= bottom) {
-      if (id) {
-        $('.nav-link-custom').removeClass('active');
-        $(`.nav-link-custom[href="#${id}"]`).addClass('active');
-      }
-    }
+const search = document.getElementById("trainer-search");
+const filter = document.getElementById("category-filter");
+const cards = [...document.querySelectorAll(".trainer-card")];
+const resultCount = document.getElementById("result-count");
+const emptyState = document.getElementById("empty-state");
+function filterTrainers() {
+  const text = (search?.value || "").toLocaleLowerCase().trim();
+  const category = filter?.value || "all";
+  let visible = 0;
+  cards.forEach(card => {
+    const haystack = `${card.dataset.name} ${card.dataset.category}`.toLocaleLowerCase();
+    const matches = haystack.includes(text) && (category === "all" || category === card.dataset.category);
+    card.hidden = !matches;
+    if (matches) visible++;
   });
+  if (resultCount) resultCount.textContent = `${visible} coach${visible === 1 ? "" : "es"} found`;
+  if (emptyState) emptyState.hidden = visible !== 0;
+}
+search?.addEventListener("input", filterTrainers);
+filter?.addEventListener("change", filterTrainers);
+if (cards.length) filterTrainers();
+
+const form = document.getElementById("join-form");
+const startDate = document.getElementById("start-date");
+const formFeedback = document.getElementById("form-feedback");
+if (startDate) {
+  const now = new Date();
+  const localToday = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+    .toISOString().slice(0, 10);
+  startDate.min = localToday;
+}
+form?.addEventListener("submit", event => {
+  event.preventDefault();
+  if (!form.reportValidity()) return;
+  const fullName = document.getElementById("full-name").value.trim();
+  formFeedback.replaceChildren();
+  const heading = document.createElement("strong");
+  heading.textContent = `Thank you, ${fullName}!`;
+  const message = document.createElement("span");
+  message.textContent = "Your form is valid. This is a frontend demo, so no application was sent. Connect a backend or form service to receive real submissions.";
+  formFeedback.append(heading, message);
+  formFeedback.hidden = false;
+  form.reset();
+});
+
+const themeToggleBtn = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+function updateThemeUI(theme) {
+  if (!themeToggleBtn) return;
+  if (theme === "light") {
+    themeToggleBtn.textContent = "☀️ Light"; 
+    themeToggleBtn.setAttribute("aria-label", "Switch to dark mode");
+  } else {
+    themeToggleBtn.textContent ="🌙 Dark"; 
+    themeToggleBtn.setAttribute("aria-label", "Switch to light mode");
+  }
+}
+
+const savedTheme = localStorage.getItem('nurfight-theme') || 'dark';
+if (savedTheme === 'light') {
+  htmlElement.setAttribute('data-theme', 'light');
+} else {
+  htmlElement.removeAttribute('data-theme');
+}
+updateThemeUI(savedTheme);
+
+themeToggleBtn?.addEventListener('click', () => {
+  const isLight = htmlElement.getAttribute('data-theme') === 'light';
+  if (isLight) {
+    htmlElement.removeAttribute('data-theme');
+    localStorage.setItem('nurfight-theme', 'dark');
+    updateThemeUI('dark');
+  } else {
+    htmlElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('nurfight-theme', 'light');
+    updateThemeUI('light');
+  }
 });
