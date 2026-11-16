@@ -600,7 +600,6 @@ h1 span, h2 span {
   color: #ffffff !important;
   box-shadow: none !important;
 }
-/* Dark режимде: таза қара фон, ақ жазу, ешқандай артық свет/көлеңке жоқ */
 .theme-toggle-btn,
 .theme-toggle-btn:hover,
 .theme-toggle-btn:active,
@@ -662,37 +661,35 @@ h1 span, h2 span {
   border: 1px solid #e2e8f0 !important; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important; 
 }
-/* Барлық суреттерді пропорциясын бұзбай, бірдей биіктікте және ортасында ұстау */
 .coach-card img,
 .trainer-card img,
 .coach-img {
   width: auto !important;
   max-width: 100% !important;
-  height: 220px !important; /* Барлық 8 суреттің биіктігін дәл бірдей етеді */
-  object-fit: contain !important; /* Суретті кеспейді және жан-жаққа созбайды */
+  height: 220px !important;
+  object-fit: contain !important;
   display: block !important;
-  margin: 0 auto !important; /* Суретті карточканың дәл ортасына қояды */
+  margin: 0 auto !important; 
 }
 
-/* Суреттің артқы сұр фонын (контейнерін) барлық карточкада бірдей биіктікте ұстау */
+
 .coach-img-wrapper,
 .trainer-img-wrapper,
 .coach-card .img-box {
   height: 220px !important;
-  background-color: #d8dee4 !important; /* Light режимдегі сұр фон */
+  background-color: #d8dee4 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   overflow: hidden !important;
 }
-/* Барлық 8 жаттықтырушының суретін дәл бірдей тік бұрышты көлемде жасау */
 .coach-card img,
 .trainer-card img,
 .coach-img {
-  width: 155px !important;      /* Жоғарғы 4 сурет сияқты тік бұрышты ені */
-  height: 210px !important;     /* Барлық 8 суреттің биіктігі бірдей */
-  object-fit: cover !important; /* Жалпақ суреттердің артық шеттерін қиып, пішінін бірдей етеді */
-  object-position: top center !important; /* Бастары кесіліп қалмауы үшін */
+  width: 155px !important;      
+  height: 210px !important;     
+  object-fit: cover !important; 
+  object-position: top center !important; 
   display: block !important;
-  margin: 0 auto !important;    /* Сұр фонның дәл ортасына қояды */
+  margin: 0 auto !important;   
 }
